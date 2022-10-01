@@ -1,26 +1,27 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { Component } from 'react';
+import { Route, Routes } from 'react-router-dom';
 import './App.css';
+import Nav from './components/Nav/Nav';
+import Products from './pages/Products/Products';
+import About from './pages/About/About';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends Component {
+  constructor() {
+    super({});
+    this.state = {};
+  }
+  render() {
+    return (
+      <div className="app">
+        <Nav />
+        <Routes>
+          <Route path="/" element={<Products />} />
+          <Route path="/about" element={<About />} />
+        </Routes>
+      </div>
+    );
+  }
 }
 
+/* export the component to be used in other components */
 export default App;

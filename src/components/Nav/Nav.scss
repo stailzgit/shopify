@@ -1,0 +1,46 @@
+.nav {
+
+}
+
+.nav__inner {
+  display: flex;
+  height: 60px;
+  align-items: center;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+}
+
+.nav__items {
+  display: flex;
+  flex-flow: row nowrap;
+  gap: 20px;
+}
+
+.nav__item {
+  text-transform: uppercase;
+  font-weight: 700;
+  cursor: pointer;
+  text-decoration: none;
+  padding-bottom: 5px;
+  position: relative;
+
+}
+
+.nav__item::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  display: block;
+  background: none repeat scroll 0 0 transparent;
+  height: 1px;
+  width: 0;
+  background: #001E64;
+  transition: width 0.5s ease 0s, left 0.5s ease 0s;
+}
+
+.nav__item:hover::after {
+  width: 100%;
+  left: 0;
+}
+
