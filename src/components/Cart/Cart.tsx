@@ -48,7 +48,6 @@ export default class Cart extends Component<IProduct> {
           </div>
 
           <div className="cart__price">US ${price}</div>
-          {/* <div>{description}</div> */}
         </div>
       </div>
     );

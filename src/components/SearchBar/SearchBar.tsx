@@ -62,6 +62,7 @@ export default class SearchBar extends Component<IProps, IState> {
       <div className="search">
         <input
           type="text"
+          placeholder="input text"
           value={this.state.text}
           onChange={this.search}
           className="search__input"
