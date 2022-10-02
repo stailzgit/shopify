@@ -19,7 +19,7 @@ export default class SearchBar extends Component<IProps, IState> {
   constructor(props: IProps) {
     super(props);
     this.state = {
-      text: '',
+      text: this.props.search,
     };
   }
 

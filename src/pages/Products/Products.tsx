@@ -1,4 +1,3 @@
-import axios from 'axios';
 import React, { Component } from 'react';
 import './Products.scss';
 import { IProduct } from '../../models/IProduct';
@@ -22,7 +21,7 @@ export default class Products extends Component<Record<string, never>, MyState> 
       products: [] as IProduct[],
       filteredProducts: [] as IProduct[],
       error: '',
-      search: '',
+      search: localStorage.getItem('userSearch') as string,
       isGetApi: false,
     };
   }
@@ -41,6 +40,7 @@ export default class Products extends Component<Record<string, never>, MyState> 
 
   setSearch = (search: string) => {
     this.setState({ search }, () => this.searchUpdate());
+    localStorage.setItem('userSearch', search);
   };
 
   async componentDidMount() {
@@ -61,10 +61,6 @@ export default class Products extends Component<Record<string, never>, MyState> 
 
   render() {
     const { filteredProducts, error, loading, search } = this.state;
-
-    // if (error) return <h1>{error}</h1>;
-    // if (loading) return <h1>Loading...</h1>;
-
     return (
       <>
         <div className="products">
