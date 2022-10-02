@@ -4,6 +4,7 @@ import './Products.scss';
 import { IProduct } from '../../models/IProduct';
 import Cart from '../../components/Cart/Cart';
 import SearchBar from '../../components/SearchBar/SearchBar';
+import Loader from '../../components/Loader/Loader';
 
 interface MyState {
   loading: boolean;
@@ -71,8 +72,8 @@ export default class Products extends Component<Record<string, never>, MyState> 
             <div className="products__inner">
               <SearchBar search={search} setSearch={this.setSearch} />
 
-              {error && <h1>{error}</h1>}
-              {loading && <h1>{loading}</h1>}
+              {error && <h1 className="products__error">{error}</h1>}
+              {loading && <Loader />}
 
               <div className="products__list">
                 {filteredProducts?.map((cart) => (

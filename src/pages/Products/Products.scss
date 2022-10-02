@@ -19,6 +19,13 @@
     gap: 10px;
     margin-bottom: 20px;
   }
+
+  &__error {
+    margin: 0 auto;
+    color: red;
+    font-weight: 500;
+    font-size: 18px;
+  }
 }
 
 
