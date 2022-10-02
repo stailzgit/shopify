@@ -27,6 +27,8 @@
     background-color: rgb(32, 105, 179);
     border-top-right-radius: 5px;
     border-bottom-right-radius: 5px;
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
 
 
     &>img {
