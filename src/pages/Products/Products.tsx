@@ -7,49 +7,78 @@ import SearchBar from '../../components/SearchBar/SearchBar';
 
 interface MyState {
   loading: boolean;
-  data: IProduct[] | null;
+  products: IProduct[];
+  filteredProducts: IProduct[];
   error: string;
   search: string;
+  isGetApi: boolean;
 }
-
 export default class Products extends Component<Record<string, never>, MyState> {
-  constructor() {
-    super({});
+  constructor(props = {}) {
+    super(props);
     this.state = {
       loading: true,
-      data: [] as IProduct[],
+      products: [] as IProduct[],
+      filteredProducts: [] as IProduct[],
       error: '',
       search: '',
+      isGetApi: false,
     };
   }
 
+  searchUpdate = () => {
+    const searchBy = ['title', 'category', 'description'];
+    const tmpFilterProducts = this.state.products.filter((product) =>
+      Object.entries(product).some(
+        ([key, value]) =>
+          searchBy.some((item) => item === key) &&
+          String(value).toLowerCase().includes(this.state.search.toLowerCase())
+      )
+    );
+    this.setState({ filteredProducts: tmpFilterProducts });
+  };
+
+  setSearch = (search: string) => {
+    this.setState({ search }, () => this.searchUpdate());
+  };
+
   async componentDidMount() {
+    if (this.state.isGetApi) return;
+
     try {
       const response = await fetch('https://fakestoreapi.com/products?limit=30');
-      const data = await response.json();
-      this.setState({ loading: false, data });
+      const productsResponse = await response.json();
+      this.setState({ loading: false, products: productsResponse });
+      this.setState({ filteredProducts: productsResponse });
     } catch (e) {
       console.log(e.message);
       this.setState({ error: e.message });
+    } finally {
+      this.setState({ isGetApi: true });
     }
   }
 
   render() {
-    const { data, error, loading, search } = this.state;
-    console.log(data, data);
+    const { filteredProducts, error, loading, search } = this.state;
 
-    if (error) return <h1>{error}</h1>;
-    if (loading) return <h1>Loading...</h1>;
+    // if (error) return <h1>{error}</h1>;
+    // if (loading) return <h1>Loading...</h1>;
 
     return (
       <>
         <div className="products">
           <div className="container">
-            <SearchBar search={search} />
-            <div className="products__list">
-              {data?.map((cart) => (
-                <Cart {...cart} key={cart.id} />
-              ))}
+            <div className="products__inner">
+              <SearchBar search={search} setSearch={this.setSearch} />
+
+              {error && <h1>{error}</h1>}
+              {loading && <h1>{loading}</h1>}
+
+              <div className="products__list">
+                {filteredProducts?.map((cart) => (
+                  <Cart {...cart} key={cart.id} />
+                ))}
+              </div>
             </div>
           </div>
         </div>

@@ -7,10 +7,15 @@ import About from './pages/About/About';
 import PageNotFound from './pages/PageNotFound/PageNotFound';
 
 class App extends Component {
-  constructor() {
-    super({});
+  constructor(props = {}) {
+    super(props);
     this.state = {};
   }
+
+  setSearch(search: string) {
+    this.setState({ search });
+  }
+
   render() {
     return (
       <div className="app">

@@ -1,8 +1,13 @@
 .nav {
   padding: 0 20px;
+  width: 100%;
+  position: fixed;
+  top: 0;
+  z-index: 100;
+  background-color: rgb(32, 105, 179);
 
   &__logo {
-    width: 40px;
+    width: 30px;
     cursor: pointer;
   }
 
@@ -18,6 +23,7 @@
     display: flex;
     flex-flow: row nowrap;
     gap: 20px;
+
   }
 
   &__item {
@@ -25,20 +31,20 @@
     font-weight: 700;
     cursor: pointer;
     text-decoration: none;
-    padding-bottom: 5px;
     position: relative;
+    color: white;
   }
 
   &__item::after {
     content: "";
     position: absolute;
-    bottom: 0;
+    bottom: -4px;
     left: 50%;
     display: block;
     background: none repeat scroll 0 0 transparent;
     height: 1px;
     width: 0;
-    background: #001E64;
+    background: #ffffff;
     transition: width 0.5s ease 0s, left 0.5s ease 0s;
   }
   &__item:hover::after {
