@@ -4,6 +4,7 @@ import './App.css';
 import Nav from './components/Nav/Nav';
 import Products from './pages/Products/Products';
 import About from './pages/About/About';
+import PageNotFound from './pages/PageNotFound/PageNotFound';
 
 class App extends Component {
   constructor() {
@@ -17,6 +18,7 @@ class App extends Component {
         <Routes>
           <Route path="/" element={<Products />} />
           <Route path="/about" element={<About />} />
+          <Route path="*" element={<PageNotFound />} />
         </Routes>
       </div>
     );
